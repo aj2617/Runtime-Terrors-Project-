@@ -1,4 +1,7 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
+from fastapi.encoders import jsonable_encoder
 from app.directives.compiler import apply_directives
 from app.directives.validator import DirectiveValidationError
 from app.llm.interpreter import LLMProviderError, interpret_notes
@@ -7,6 +10,12 @@ from app.schemas import EnergyRequest, EnergyResponse
 from app.validation.replay import ReplayValidationError, validate_plan
 
 app = FastAPI(title="GridWise Energy Optimizer", version="1.0.0")
+
+
+@app.exception_handler(RequestValidationError)
+async def request_validation_error_handler(_: Request, exc: RequestValidationError):
+    """The published API contract uses 400 for malformed or structurally invalid input."""
+    return JSONResponse(status_code=400, content={"detail": jsonable_encoder(exc.errors())})
 
 @app.get("/health")
 async def health():

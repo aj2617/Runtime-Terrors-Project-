@@ -49,4 +49,9 @@ def test_provider_failure_is_safe(client, monkeypatch):
 def test_non_finite_numeric_input_is_rejected(client):
     invalid = json.loads(json.dumps(CASES[0]["input"]))
     invalid["hours"][0]["demand_kwh"] = "NaN"
-    assert client.post("/optimize-energy", json=invalid).status_code == 422
+    assert client.post("/optimize-energy", json=invalid).status_code == 400
+
+
+def test_malformed_json_is_rejected_with_contract_status(client):
+    response = client.post("/optimize-energy", content="{not valid json", headers={"Content-Type": "application/json"})
+    assert response.status_code == 400

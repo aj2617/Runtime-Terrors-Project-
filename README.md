@@ -35,6 +35,14 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000
 
 Check readiness at `GET http://127.0.0.1:8000/health`; interactive API documentation is at `/docs`.
 
+## Public deployment
+
+The deployed public API base URL is `https://runtime-terrors-project.onrender.com`.
+
+- Health check: `https://runtime-terrors-project.onrender.com/health`
+- Interactive API documentation: `https://runtime-terrors-project.onrender.com/docs`
+- Main endpoint: `POST https://runtime-terrors-project.onrender.com/optimize-energy`
+
 ## API examples
 
 Health check:
@@ -62,7 +70,7 @@ The official public fixture is stored in `sample_cases/public_cases.json`. It co
 pytest -q
 ```
 
-Expected result: `23 passed`. Tests validate the public optimizer costs, replay rules, and API contract using mocked structured LLM interpretations. A configured provider is needed for live natural-language interpretation.
+Expected result: `24 passed`. Tests validate the public optimizer costs, replay rules, malformed-request behavior, and API contract using mocked structured LLM interpretations. A configured provider is needed for live natural-language interpretation.
 
 ## Docker fallback
 
