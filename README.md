@@ -35,6 +35,25 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000
 
 Check readiness at `GET http://127.0.0.1:8000/health`; interactive API documentation is at `/docs`.
 
+## API examples
+
+Health check:
+
+```powershell
+Invoke-RestMethod http://127.0.0.1:8000/health
+```
+
+Run an official sample through the live endpoint:
+
+```powershell
+$case = (Get-Content -Raw sample_cases\public_cases.json | ConvertFrom-Json).cases[0]
+$body = $case.input | ConvertTo-Json -Depth 12
+Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8000/optimize-energy `
+  -ContentType "application/json" -Body $body
+```
+
+`SAMPLE-01` should return two directive interpretations, 24 plan entries, and `total_cost_bdt` of `38365`.
+
 ## Test
 
 The official public fixture is stored in `sample_cases/public_cases.json`. It contains ten scenarios. Run:
