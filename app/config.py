@@ -11,5 +11,7 @@ class Settings:
 
     LLM_MODEL = os.getenv("LLM_MODEL", "")
 
+    LLM_BASE_URL = os.getenv("LLM_BASE_URL", "https://api.openai.com/v1")
+
 
 settings = Settings()

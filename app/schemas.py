@@ -2,7 +2,7 @@
 
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, model_serializer, model_validator
 
 
 class StrictModel(BaseModel):
@@ -53,6 +53,11 @@ class StructuredAdjustment(StrictModel):
     factor: float | None = None
     minimum_energy_kwh: float | None = None
     max_grid_kwh: float | None = None
+
+    @model_serializer(mode="wrap")
+    def serialize_without_unused_fields(self, handler):
+        """The API contract requires only the fields applicable to each directive."""
+        return {key: value for key, value in handler(self).items() if value is not None}
 
 
 DirectiveType = Literal[

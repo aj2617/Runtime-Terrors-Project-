@@ -23,7 +23,8 @@ Set the following values in `.env` (never commit this file):
 
 ```env
 LLM_API_KEY=your-provider-key
-LLM_MODEL=your-model-name
+LLM_MODEL=openai/gpt-oss-120b
+LLM_BASE_URL=https://api.groq.com/openai/v1
 ```
 
 Start the service:
@@ -57,4 +58,4 @@ Then open `http://127.0.0.1:8000/health`. Before submission, publish this image 
 
 ## Limitations and security
 
-The service requires a reachable configured LLM provider for live requests. Provider failures return a controlled error; raw provider errors and keys are not returned by the API. `.env` is ignored by Git. The LP deliberately models only rules defined in the challenge: no efficiency, export, degradation, or demand-shifting assumptions are added.
+The default example configuration uses Groq's OpenAI-compatible API and `openai/gpt-oss-120b`. Another OpenAI-compatible provider can be used by changing `LLM_BASE_URL` and `LLM_MODEL`. Provider failures return a controlled error; raw provider errors and keys are not returned by the API. `.env` is ignored by Git. The LP deliberately models only rules defined in the challenge: no efficiency, export, degradation, or demand-shifting assumptions are added.
