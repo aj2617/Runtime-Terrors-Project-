@@ -17,6 +17,10 @@ async def request_validation_error_handler(_: Request, exc: RequestValidationErr
     """The published API contract uses 400 for malformed or structurally invalid input."""
     return JSONResponse(status_code=400, content={"detail": jsonable_encoder(exc.errors())})
 
+@app.get("/")
+def home():
+    return{ "message":" Hello! Welcome the Gridwise-Energy Optimizer."}
+
 @app.get("/health")
 async def health():
     return {"status": "ok"}
