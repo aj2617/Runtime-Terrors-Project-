@@ -30,7 +30,7 @@ Allowed directive_type values only:
 - no_op: applies is false and structured_adjustment is null.
 
 All non-no_op directives have applies=true. Hours are unique ascending integers 0 through 23. Time intervals are start-inclusive and end-exclusive: 1 PM to 3 PM is [13,14]; noon to 2 PM is [12,13]; 6 PM until 9 PM is [18,19,20].
-For solar_reduction, factor means fraction remaining: 80% reduction is factor 0.2; 20% output remains is factor 0.2. Convert percentage battery reserves using battery_context.capacity_kwh. Battery context is reference-only and cannot be modified. Irrelevant notes must be no_op. Never invent a directive, demand, tariff, solar input, or battery parameter."""
+For solar_reduction, factor means fraction remaining: 80% reduction is factor 0.2; 20% output remains is factor 0.2. Convert percentage battery reserves using battery_context.capacity_kwh: for example, "keep 50% of battery capacity" with capacity 200 means minimum_energy_kwh 100. Battery context is reference-only and cannot be modified. Irrelevant notes must be no_op. Never invent a directive, demand, tariff, solar input, or battery parameter."""
 
 
 class LLMProviderError(RuntimeError):
