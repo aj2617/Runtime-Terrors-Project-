@@ -93,6 +93,12 @@ For an immutable submission reference, use this verified image digest:
 shihab34/gridwise@sha256:6d9a402c50ffc05a2bca4b5a9337b1b5382030fd46e998b7b804b09c2a819117
 ```
 
+The GitHub Actions workflow also publishes a linked GitHub Container Registry image after each successful run:
+
+```powershell
+docker pull ghcr.io/aj2617/runtime-terrors-project-:latest
+```
+
 ## Limitations and security
 
 The default example configuration uses Groq's OpenAI-compatible API and `openai/gpt-oss-120b`. Another OpenAI-compatible provider can be used by changing `LLM_BASE_URL` and `LLM_MODEL`. Provider failures return a controlled error; raw provider errors and keys are not returned by the API. `.env` is ignored by Git. The LP deliberately models only rules defined in the challenge: no efficiency, export, degradation, or demand-shifting assumptions are added.
