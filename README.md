@@ -73,7 +73,21 @@ docker build -t gridwise:local .
 docker run --rm -p 8000:8000 --env-file .env gridwise:local
 ```
 
-Then open `http://127.0.0.1:8000/health`. Before submission, publish this image to your chosen registry with a fixed tag or digest and replace this README section with its exact pull command.
+Then open `http://127.0.0.1:8000/health`.
+
+The repository includes a GitHub Actions publish workflow. Add these GitHub repository secrets before using it:
+
+- `DOCKERHUB_USERNAME`: `shihab34`
+- `DOCKERHUB_TOKEN`: a Docker Hub access token with read/write permission
+
+After a push to `main` (or a manual workflow run), pull and run the published fallback image:
+
+```powershell
+docker pull shihab34/gridwise:latest
+docker run --rm -p 8000:8000 --env-file .env shihab34/gridwise:latest
+```
+
+For submission, use the immutable image tag created from the Git commit SHA or the digest shown by Docker Hub.
 
 ## Limitations and security
 
