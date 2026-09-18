@@ -80,14 +80,18 @@ The repository includes a GitHub Actions publish workflow. Add these GitHub repo
 - `DOCKERHUB_USERNAME`: `shihab34`
 - `DOCKERHUB_TOKEN`: a Docker Hub access token with read/write permission
 
-After a push to `main` (or a manual workflow run), pull and run the published fallback image:
+The published fallback image is available on Docker Hub. Pull and run it with:
 
 ```powershell
 docker pull shihab34/gridwise:latest
 docker run --rm -p 8000:8000 --env-file .env shihab34/gridwise:latest
 ```
 
-For submission, use the immutable image tag created from the Git commit SHA or the digest shown by Docker Hub.
+For an immutable submission reference, use this verified image digest:
+
+```text
+shihab34/gridwise@sha256:6d9a402c50ffc05a2bca4b5a9337b1b5382030fd46e998b7b804b09c2a819117
+```
 
 ## Limitations and security
 
